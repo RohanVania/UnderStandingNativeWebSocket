@@ -1,0 +1,20 @@
+<h1>Front END   </h1>
+
+
+<script>
+
+    let ws=new WebSocket('ws://localhost:8000');
+    console.log(ws);
+
+    // Old Method you can use ws.onmessage()
+    ws.addEventListener('message',(event)=>{
+        console.log("Message from the Server",event.data)
+    })
+
+    ws.onopen=(event=>{
+        console.log(event)
+        ws.send("I am excited to learn about the Websockets")
+    }
+    )
+
+        </script> 

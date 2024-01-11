@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Connecting to Express</title>
+</head>
+
+<body>
+    <h1>Frontend Connecting to Express Server Use Web Socket</h1>
+    <script>
+        const ws = new WebSocket('ws://localhost:8001')
+        console.log(ws)
+
+        ws.onopen=(event)=>{
+            ws.send("Hello I am from Client Excited to learn about Websockets")
+        }
+        
+        ws.onmessage = (event) => {console.log(event.data)};
+
+    </script>
+</body>
+
+</html>

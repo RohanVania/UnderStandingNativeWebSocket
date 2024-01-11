@@ -1,0 +1,19 @@
+{
+  "name": "practisewebsocket",
+  "version": "1.0.0",
+  "description": "",
+  "main": "justWsServer.js",
+  "type": "module",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^3.0.2",
+    "ws": "^8.16.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon justWsServer.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
