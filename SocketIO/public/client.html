@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Small Chat App</title>
+  <link rel="stylesheet" href="./output.css">
+</head>
+
+<body>
+
+  <h1 class="tw-text-red tw-text-2xl tw-m-10">Hello, Welcome to my Chat App</h1>
+
+  <form id="form-submit" class="tw-m-10">
+    <input id="input-div" type="text" class="tw-p-4  tw-border-2 tw-border-black" />
+  <input type="submit" value="Submit"  style="background-color: paleturquoise; padding: 18px 35px ;" />
+  </form>
+
+  <ul id="ul-list" class=" tw-ml-[150px] tw-flex tw-flex-col tw-gap-4">
+   
+  </ul>
+
+</body>
+
+</html>
+
+
+<!-- <script src="https://cdn.socket.io/4.7.3/socket.io.min.js"></script>
+ -->
+
+ <script src="/socket.io/socket.io.js"></script>
+<script>
+
+  //** Socket io is going to add the io object in the global scope
+  const socket = io('http://localhost:8003');
+  // console.log(socket);
+
+  // Never Put the Event in the Connect
+  socket.on('connect', () => {
+    console.log("Socket Id at Client Side", socket.id)
+  })
+
+  socket.on('messageFromServer', (data) => {
+    console.log(data)
+  })
+
+
+  document.querySelector("#form-submit").addEventListener('submit', (event) => {
+    event.preventDefault();
+    const inputData = document.querySelector("#input-div")
+    socket.emit('messageToServer',{text:inputData.value});
+    inputData.value="";
+  })
+
+
+  socket.on('replyFromServer',(data)=>{
+    document.querySelector('#ul-list').innerHTML+=`<li class="tw-text-4xl tw-text-blue-500">${data.text}</li>`
+  })
+
+
+
+</script>
