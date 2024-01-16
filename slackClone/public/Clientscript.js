@@ -17,13 +17,15 @@ socket.on('nsList', (nsList) => {
     const namespaceList = document.querySelector(".namespaces")
     namespaceList.innerHTML = "";
     nsList.forEach((element, indx) => {
-        namespaceList.innerHTML += `<div class="namespace active" ns="${element.ns}"><img src="${element.image}"></div>`
+        namespaceList.innerHTML += `<div class="namespace " ns="${element.ns}"><img src="${element.image}"></div>`
     })
 
+    
     Array.from(document.getElementsByClassName("namespace")).forEach((outerelement, indx) => {
         outerelement.addEventListener('click', (e) => {
-
-            outerelement.classList.toggle('active')
+            
+            console.log(outerelement)
+            localStorage.setItem('nsactive',outerelement.getAttribute('ns'))
 
             joinNs(outerelement, nsList);
             // const nsEndpoint=outerelement.getAttribute('ns')
@@ -36,8 +38,14 @@ socket.on('nsList', (nsList) => {
 
         })
     })
+    let alreadypressed=localStorage.getItem('nsactive');
+    if(alreadypressed){
+        let {id}=nsList.find((el,indx)=>el.ns===alreadypressed);
+        joinNs(document.getElementsByClassName('namespace')[id],nsList);
+    }  else{
 
-    joinNs(document.getElementsByClassName("namespace")[0],nsList);
+        joinNs(document.getElementsByClassName("namespace")[0],nsList);
+    }
 
 
 })
