@@ -6,7 +6,7 @@ const namespace2=new NamespaceClass(1,"https://www.mozilla.org/media/img/logos/f
 const namespace3=new NamespaceClass(2,"https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png","/linux")
 
 
-namespace1.addRoom(new RoomClass(0,'New Articles',0));
+namespace1.addRoom(new RoomClass(0,'New Articles',0,true));
 namespace1.addRoom(new RoomClass(1,'Editors',0));
 namespace1.addRoom(new RoomClass(2,'Other',0));
 

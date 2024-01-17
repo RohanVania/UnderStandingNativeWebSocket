@@ -4,6 +4,7 @@ class RoomClass{
         this.roomId=roomId;
         this.roomTitle=roomTitle;
         this.namespaceId=namespaceId;
+        this.privateRoom=privateRoom;
         this.history=[];
 
     }

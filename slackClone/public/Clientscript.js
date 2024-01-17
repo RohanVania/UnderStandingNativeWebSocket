@@ -1,3 +1,4 @@
+
 import { joinNs } from "./JoinNs.js"
 
 //* Connected to Main Namespace
@@ -5,7 +6,7 @@ const socket = io('');
 
 //* Different Sockets we will put in the array
 
-const nameSpaceSockets = [];
+export const nameSpaceSockets = [];
 const listerners={
     nschange:[]
 }
@@ -45,10 +46,7 @@ socket.on('nsList', (nsList) => {
             nameSpaceSockets[element.id] = thisNs;
         }
 
-        nameSpaceSockets[element.id].on('nsChange', (data) => {
-            console.log("NameSpace Changed");
-            console.log(data)
-        })
+        addListeners(element.id)
         
         // console.log("Hello",nameSpaceSockets)
         // nameSpaceSockets[element.id].on('nsChange',(data)=>{
