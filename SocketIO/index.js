@@ -14,8 +14,8 @@ const expressServer=app.listen(8003,()=>console.log("Server Started Running"))
 
 //** IO equals the server Object */
 const io=socketio(expressServer,{
-    // transports:['websocket'],
-    // allowUpgrades:false,
+    // transports:['websocket'],  //** This is for who socketio library will upgraged , it starts with long polling and then upgrades to socket io */
+    // allowUpgrades:false,      //* If I make this false It wont upgrade
     // serveClient:false
 });
 

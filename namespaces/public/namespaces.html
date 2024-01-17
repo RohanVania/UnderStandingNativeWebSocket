@@ -34,15 +34,15 @@
 </style>
 
 <body>
-    
+
     <div class="container text-center">
-            <form id="form-submit" class="tw-m-10 tw-flex tw-gap-4">
-                <input id="input-div" type="text" class="tw-p-4  tw-border-[1px] tw-border-black" placeholder="Enter your message " />
-                <input type="submit" class="tw-bg-blue-400 tw-text-white" value="Submit"/>
-            </form>
+        <form id="form-submit" class="tw-m-10 tw-flex tw-gap-4">
+            <input id="input-div" type="text" class="tw-p-4  tw-border-[1px] tw-border-black"
+                placeholder="Enter your message " />
+            <input type="submit" class="tw-bg-blue-400 tw-text-white" value="Submit" />
+        </form>
 
         <ul id="messages">
-            <li>Hello</li>
         </ul>
 
     </div>
@@ -58,10 +58,13 @@
             }
 
         },
-        prefix:"tw-"
+        prefix: "tw-"
     }
 </script>
 
-<script></script>
+<script src="/socket.io/socket.io.js"></script>
+
+<script src="./script.js"></script>
+
 
 </html>

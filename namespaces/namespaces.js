@@ -11,8 +11,12 @@ app.get('/',(req,res)=>{
 const expressServer=app.listen(8001,()=>console.log("Server Started Running on 8001"));
 const io=socketio(expressServer);
 
+//** Room are just server thing client does not known anything about room */
+//** Namespace is multiplexing concept */
+
 io.on('connection',(socket)=>{
     console.log(socket.id," has Connected")
-    socket.emit()
-    socket.send()
+    socket.on('messagetoClientonFormSubmit',(data)=>{
+        io.emit('emittingtoallClients',data)
+    })
 })

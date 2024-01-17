@@ -5,7 +5,23 @@ const socket = io('');
 
 //* Different Sockets we will put in the array
 
-const nameSpaceSockets=[];
+const nameSpaceSockets = [];
+const listerners={
+    nschange:[]
+}
+
+const addListeners=(id)=>{
+    if(!listerners.nschange[id]){
+    nameSpaceSockets[id].on('nsChange', (data) => {
+        console.log("NameSpace Changed");
+        console.log(data)
+    })
+
+    listerners.nschange[id]=true;
+}else{
+    //* Do Nothing
+}
+}
 
 socket.on('connect', () => {
     console.log("Client Connected to the Socket", socket.id);
@@ -23,20 +39,29 @@ socket.on('nsList', (nsList) => {
     namespaceList.innerHTML = "";
     nsList.forEach((element, indx) => {
         namespaceList.innerHTML += `<div class="namespace " ns="${element.ns}"><img src="${element.image}"></div>`
+        
+        if (!nameSpaceSockets[element.id]) {
+            const thisNs = io(`http://localhost:8004${element.ns}`)
+            nameSpaceSockets[element.id] = thisNs;
+        }
 
-        console.log("Hello",nameSpaceSockets)
-
-        nameSpaceSockets[element.id].on('nsChange',(data)=>{
-            console.log("NameSpaceChanges")
+        nameSpaceSockets[element.id].on('nsChange', (data) => {
+            console.log("NameSpace Changed");
             console.log(data)
         })
+        
+        // console.log("Hello",nameSpaceSockets)
+        // nameSpaceSockets[element.id].on('nsChange',(data)=>{
+        //     console.log("NameSpaceChanges")
+        //     console.log(data)
+        // })
     })
 
-    
+
     Array.from(document.getElementsByClassName("namespace")).forEach((outerelement, indx) => {
         outerelement.addEventListener('click', (e) => {
-            
-            localStorage.setItem('nsactive',outerelement.getAttribute('ns'))
+
+            localStorage.setItem('nsactive', outerelement.getAttribute('ns'))
 
             joinNs(outerelement, nsList);
 
@@ -51,13 +76,13 @@ socket.on('nsList', (nsList) => {
         })
     })
 
-    let alreadypressed=localStorage.getItem('nsactive');
-    if(alreadypressed){
-        let {id}=nsList.find((el,indx)=>el.ns===alreadypressed);
-        joinNs(document.getElementsByClassName('namespace')[id],nsList);
-    }  else{
+    let alreadypressed = localStorage.getItem('nsactive');
+    if (alreadypressed) {
+        let { id } = nsList.find((el, indx) => el.ns === alreadypressed);
+        joinNs(document.getElementsByClassName('namespace')[id], nsList);
+    } else {
 
-        joinNs(document.getElementsByClassName("namespace")[0],nsList);
+        joinNs(document.getElementsByClassName("namespace")[0], nsList);
     }
 
 
