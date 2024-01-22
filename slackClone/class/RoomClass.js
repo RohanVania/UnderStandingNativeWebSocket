@@ -10,7 +10,9 @@ class RoomClass{
     }
 
     addMessage(message){
+        console.log('History Message');
         this.history.push(message)
+        console.log(this.history)
     }
 
     clearHistory(){
